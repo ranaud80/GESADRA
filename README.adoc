@@ -11,7 +11,7 @@ l'application GesADRA permet la gestion informatisée de la main courante du tra
 Après une présentation officiel lors de la réunion de zone SUD-EST en avril, GesADRA est diffusé plus largement.
 Nous vous proposons de tester GesADRA, et de découvrir le site Internet qui lui est dédié http://gesadra.free.fr/
 
-== Instalation ==
+== Installation ==
 Pour le faire fonctionner, vous téléchargerez puis installerez :
 
 le logiciel Python (langage et moteur d'exécution - version 2.6(disponible dans l'espace téléchargement) ou 2.7 recommandée)
