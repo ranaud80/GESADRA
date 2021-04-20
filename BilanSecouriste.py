@@ -1,13 +1,13 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
-from ScrolledText import ScrolledText
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
 
 import datetime
 import time
 import os
-import tkMessageBox
-import tkFont
+import tkinter.messagebox as tkMessageBox
+import tkinter.font as tkFont
 import Pmw
 import Commun # Module principal des fonctions annexes
  
@@ -338,8 +338,7 @@ class FormBILSEC:
             tkMessageBox.showinfo('Bilan Secouriste', 'Lancez une impression manuelle au format "Paysage" SVP')
         else :
             tkMessageBox.showinfo('Bilan Secouriste', 'Message créé : ' + self.vFicBILSEC)
-        
-	self.fenetre.destroy()
+        #self.fenetre.destroy()
 
 
     def annulerBILSEC(self, evt = None):
@@ -502,35 +501,35 @@ class FormBILSEC:
         fic.write('--------------------------------------------------------------------------------\n')
     
         # Informations transmission
-        fic.write("GDH Emission : " + Commun.encode(self.efGdh.getvalue())+ "\n")
-        fic.write("Emis par     : " + Commun.encode(self.cbEmetteur.get())+ "\n")
-        fic.write("Reçu par     : " + Commun.encode(self.cbDestinataire.get())+ "\n")
-        fic.write("Instructions : " + Commun.encode(self.eInstruc.get())+ "\n")
+        fic.write("GDH Emission : " + self.efGdh.getvalue()+ "\n")
+        fic.write("Emis par     : " + self.cbEmetteur.get()+ "\n")
+        fic.write("Reçu par     : " + self.cbDestinataire.get()+ "\n")
+        fic.write("Instructions : " + self.eInstruc.get()+ "\n")
         fic.write('================================================================================\n')
 
         # Entête du message
         fic.write("BILAN SECOURISTE".center(80) + "\n")
-        fic.write("Origine      : " + Commun.encode(self.efOrigine.getvalue())+"\n")
-        fic.write("Dest. Action : " + Commun.encode(self.efDestAction.getvalue())+"\n")
-        fic.write("Dest. Info   : " + Commun.encode(self.eDestInfo.get())+"\n")
-        fic.write("Urgence      : " + Commun.encode(self.cbDegUrg.get())+"\n")
+        fic.write("Origine      : " + self.efOrigine.getvalue()+"\n")
+        fic.write("Dest. Action : " + self.efDestAction.getvalue()+"\n")
+        fic.write("Dest. Info   : " + self.eDestInfo.get()+"\n")
+        fic.write("Urgence      : " + self.cbDegUrg.get()+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Corps du message
         fic.write("------Identité de la Victime-------\n")
-        fic.write("Num Victime  : " + Commun.encode(self.efNum.getvalue()) +"\n")
-        fic.write("Age          : " + Commun.encode(self.eAge.get()) +"\n")
-        fic.write("Sexe         : " + Commun.encode(self.rbSexe.getvalue()) +"\n")
-        fic.write("Nom - Prénom : " + Commun.encode(self.eNom.get()) +"\n")
-        fic.write("Adresse : " + Commun.encode(self.eAdr.get()) +"\n")
+        fic.write("Num Victime  : " + self.efNum.getvalue() +"\n")
+        fic.write("Age          : " + self.eAge.get() +"\n")
+        fic.write("Sexe         : " + self.rbSexe.getvalue() +"\n")
+        fic.write("Nom - Prénom : " + self.eNom.get() +"\n")
+        fic.write("Adresse : " + self.eAdr.get() +"\n")
 
         fic.write("------Nature de la detresse--------\n")
-        fic.write("Nature        : " + Commun.encode(self.cbNature.get()) +"\n")
-        fic.write("Détr. Vitale  : " + Commun.encode(self.cbVitale.get()) +"\n")
-        fic.write("Tri PMA       : " + Commun.encode(self.cbUrgence.get()) +"\n")
+        fic.write("Nature        : " + self.cbNature.get() +"\n")
+        fic.write("Détr. Vitale  : " + self.cbVitale.get() +"\n")
+        fic.write("Tri PMA       : " + self.cbUrgence.get() +"\n")
         fic.write("Circonstances :\n")
         # découpage des lignes du message
-        for ligne in Commun.encode(self.stCirc.get(1.0,END)).split("\n"):
+        for ligne in self.stCirc.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write(ligne +"\n")
@@ -539,35 +538,35 @@ class FormBILSEC:
 
         # Conscience
         fic.write('--------------Conscience--------------\n')
-        fic.write("Victime      : " + Commun.encode(self.rbConsc.getvalue()) + " ")
+        fic.write("Victime      : " + self.rbConsc.getvalue() + " ")
         for item in self.rsConsc.getvalue():
-            if item.strip <> "": fic.write(item.strip() + " ")
+            if item.strip != "": fic.write(item.strip() + " ")
         fic.write("\n")    
         fic.write("PCI          : ")
         if self.iPCI.get() == True:
-            fic.write("OUI " + Commun.encode(self.eTmpPci.get())+"\n")
+            fic.write("OUI " + self.eTmpPci.get()+"\n")
         else:
             fic.write("NON\n")
 
         fic.write('--------------Ventilation--------------\n')
-        fic.write("Fréquence    : " + Commun.encode (self.efFreqVent.getvalue() ) + " ")
+        fic.write("Fréquence    : " + self.efFreqVent.getvalue() + " ")
         for item in self.rsVentil.getvalue():
-            if item.strip <> "": fic.write(item.strip() + " ")
+            if item.strip != "": fic.write(item.strip() + " ")
         fic.write("\n")    
-        fic.write("Saturation   : " + Commun.encode(self.eSat02.get()) + "\n")
+        fic.write("Saturation   : " + self.eSat02.get() + "\n")
 
         fic.write('--------------Circulation--------------\n')
-        fic.write("Fréquence    : " + Commun.encode (self.efFreqCirc.getvalue()) + " ")
+        fic.write("Fréquence    : " + self.efFreqCirc.getvalue() + " ")
         for item in self.rsCircul.getvalue():
-            if item.strip <> "": fic.write(item.strip() + " ")
+            if item.strip != "": fic.write(item.strip() + " ")
         fic.write("\n")    
-        fic.write("Tension      : " + Commun.encode(self.eTension.get())+"\n")
+        fic.write("Tension      : " + self.eTension.get()+"\n")
 
         fic.write("---------Réflexes Pupillaires----------\n")
-        fic.write("Pup. Gauche  : "+ Commun.encode(self.cbPupGauche.get()))
+        fic.write("Pup. Gauche  : "+ self.cbPupGauche.get())
         if self.iPupGauche.get() == True: fic.write(" Réactive")
         fic.write ("\n")   
-        fic.write("Pup. Droite  : "+ Commun.encode(self.cbPupDroite.get()))
+        fic.write("Pup. Droite  : "+ self.cbPupDroite.get())
         if self.iPupDroite.get() == True: fic.write(" Réactive")
         fic.write ("\n")   
 
@@ -584,10 +583,10 @@ class FormBILSEC:
                 fic.write("\n")
             except:
                 None
-        fic.write("Autres      : " + Commun.encode(self.eAutreLes.get())+"\n")
+        fic.write("Autres      : " + self.eAutreLes.get()+"\n")
 
         fic.write("----------------Gestes-----------------\n")
-        for ligne in Commun.encode(self.stGestes.get(1.0,END)).split("\n"):
+        for ligne in self.stGestes.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write(ligne +"\n")
@@ -595,7 +594,7 @@ class FormBILSEC:
                fic.write(ligne + "\n")
 
         fic.write("-----------------Soins-----------------\n")
-        for ligne in Commun.encode(self.stSoins.get(1.0,END)).split("\n"):
+        for ligne in self.stSoins.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write(ligne +"\n")
@@ -603,9 +602,9 @@ class FormBILSEC:
                fic.write(ligne + "\n")
 
         fic.write('------------Evacuation------------\n')
-        fic.write("Conditionné  : " + Commun.encode(self.cbCondi.get()) + "\n")
-        fic.write("Evacutation  : " + Commun.encode(self.cbEvac.get()) + "\n")
-        fic.write("Orientation  : " + Commun.encode(self.eDest.get())+"\n")
+        fic.write("Conditionné  : " + self.cbCondi.get() + "\n")
+        fic.write("Evacutation  : " + self.cbEvac.get() + "\n")
+        fic.write("Orientation  : " + self.eDest.get()+"\n")
 
         fic.write("\n")
         fic.write("FIN DE MESSAGE".center(80) + "\n")
@@ -627,29 +626,29 @@ class FormBILSEC:
         fic.write('<vers>' + self.root.userData['VERSION'] + '</vers>\n')
         fic.write('<mode>' + self.root.userData['ACTIVATION'] + '</mode>\n')
         fic.write('<trans>\n')
-        fic.write('<gdh>' + Commun.encode(self.efGdh.getvalue())+'</gdh>\n')
-        fic.write('<emis>' + Commun.encode(self.cbEmetteur.get())+'</emis>\n')
-        fic.write('<recu>' + Commun.encode(self.cbDestinataire.get())+"</recu>\n")
-        fic.write("<instr>" + Commun.encode(self.eInstruc.get())+"</instr>\n")
+        fic.write('<gdh>' + self.efGdh.getvalue()+'</gdh>\n')
+        fic.write('<emis>' + self.cbEmetteur.get()+'</emis>\n')
+        fic.write('<recu>' + self.cbDestinataire.get()+"</recu>\n")
+        fic.write("<instr>" + self.eInstruc.get()+"</instr>\n")
         fic.write('</trans>\n')
         fic.write("<top>\n")
-        fic.write("<from>" + Commun.encode(self.efOrigine.getvalue())+"</from>\n")
-        fic.write("<to>" + Commun.encode(self.efDestAction.getvalue())+"</to>\n")
-        fic.write("<info>" + Commun.encode(self.eDestInfo.get())+"</info>\n")
-        fic.write("<urg>" + Commun.encode(self.cbDegUrg.get())+"</urg>\n")
+        fic.write("<from>" + self.efOrigine.getvalue()+"</from>\n")
+        fic.write("<to>" + self.efDestAction.getvalue()+"</to>\n")
+        fic.write("<info>" + self.eDestInfo.get()+"</info>\n")
+        fic.write("<urg>" + self.cbDegUrg.get()+"</urg>\n")
         fic.write('</top>\n')
         fic.write("<corps>\n")
         fic.write("<ong1>\n")
-        fic.write("<num>" + Commun.encode(self.efNum.getvalue())+"</num>\n")
-        fic.write("<age>" + Commun.encode(self.eAge.get()) +"</age>\n")
-        fic.write("<sexe>" + Commun.encode(self.rbSexe.getvalue()) +"</sexe>\n")
-        fic.write("<nom>" + Commun.encode(self.eNom.get()) +"</nom>\n")
-        fic.write("<adr>" + Commun.encode(self.eAdr.get()) +"</adr>\n")
-        fic.write("<nat>" + Commun.encode(self.cbNature.get()) +"</nat>\n")
-        fic.write("<vital>" + Commun.encode(self.cbVitale.get()) +"</vital>\n")
-        fic.write("<pma>" + Commun.encode(self.cbUrgence.get()) +"</pma>\n")
+        fic.write("<num>" + self.efNum.getvalue()+"</num>\n")
+        fic.write("<age>" + self.eAge.get() +"</age>\n")
+        fic.write("<sexe>" + self.rbSexe.getvalue() +"</sexe>\n")
+        fic.write("<nom>" + self.eNom.get() +"</nom>\n")
+        fic.write("<adr>" + self.eAdr.get() +"</adr>\n")
+        fic.write("<nat>" + self.cbNature.get() +"</nat>\n")
+        fic.write("<vital>" + self.cbVitale.get() +"</vital>\n")
+        fic.write("<pma>" + self.cbUrgence.get() +"</pma>\n")
         # découpage des lignes du message
-        for ligne in Commun.encode(self.stCirc.get(1.0,END)).split("\n"):
+        for ligne in self.stCirc.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write("<circ>" + ligne +"</circ>\n")
@@ -658,36 +657,36 @@ class FormBILSEC:
         fic.write("</ong1>\n")
         fic.write("<ong2>\n")
         fic.write("<consc>\n")
-        fic.write("<etat>" + Commun.encode(self.rbConsc.getvalue()) + "</etat>\n")
+        fic.write("<etat>" + self.rbConsc.getvalue() + "</etat>\n")
         for item in self.rsConsc.getvalue(): 
-            if item.strip() <> "": fic.write("<item>" + item.strip() + "</item>\n")    
+            if item.strip() != "": fic.write("<item>" + item.strip() + "</item>\n")    
         if self.iPCI.get() == True:
-            fic.write("<pci>OUI " + Commun.encode(self.eTmpPci.get())+"</pci>\n")
+            fic.write("<pci>OUI " + self.eTmpPci.get()+"</pci>\n")
         else:
             fic.write("<pci>NON</pci>\n")
         fic.write("</consc>\n")    
         fic.write("<ventil>\n")
-        fic.write("<freq>" + Commun.encode (self.efFreqVent.getvalue()) + "</freq>\n")
+        fic.write("<freq>" + self.efFreqVent.getvalue() + "</freq>\n")
         for item in self.rsVentil.getvalue():
-            if item.strip() <> "": fic.write("<item>" + item.strip() + "</item>\n")
-        fic.write("<sat>" + Commun.encode(self.eSat02.get()) + "</sat>\n")
+            if item.strip() != "": fic.write("<item>" + item.strip() + "</item>\n")
+        fic.write("<sat>" + self.eSat02.get() + "</sat>\n")
         fic.write("</ventil>\n")    
         fic.write('<circul>\n')
-        fic.write("<freq>" + Commun.encode (self.efFreqCirc.getvalue()) + "</freq>\n")
+        fic.write("<freq>" + self.efFreqCirc.getvalue() + "</freq>\n")
         for item in self.rsCircul.getvalue(): 
-            if item.strip() <> "": fic.write("<item>" + item.strip() + "</item>\n")
-        fic.write("<tension>" + Commun.encode(self.eTension.get())+"</tension>\n")
+            if item.strip() != "": fic.write("<item>" + item.strip() + "</item>\n")
+        fic.write("<tension>" + self.eTension.get()+"</tension>\n")
         fic.write("</circul>\n")    
         fic.write("<pupil>\n")
-        fic.write("<gauche>" + Commun.encode(self.cbPupGauche.get()) + "</gauche>\n")
+        fic.write("<gauche>" + self.cbPupGauche.get() + "</gauche>\n")
         fic.write("<reacg>" + str(self.iPupGauche.get()) + "</reacg>\n")
-        fic.write("<droite>" + Commun.encode(self.cbPupDroite.get()) + "</droite>\n")
+        fic.write("<droite>" + self.cbPupDroite.get() + "</droite>\n")
         fic.write("<reacd>" + str(self.iPupDroite.get()) + "</reacd>\n")
         fic.write ("</pupil>\n")   
         fic.write("</ong2>\n")
         fic.write("<ong3>\n")
         for ligne in self.ligneLesion : 
-            if ligne[0].get().strip() <> "":
+            if ligne[0].get().strip() != "":
                 fic.write ("<lesion>\n")
                 fic.write ("<zone>" + ligne[0].get() + "</zone>\n")
                 for choix in ligne[1]: 
@@ -695,29 +694,29 @@ class FormBILSEC:
                     if choix.get() == True: fic.write ("X")
                     fic.write("</val>\n")
                 fic.write("</lesion>\n")
-        fic.write("<autreles>" + Commun.encode(self.eAutreLes.get())+"</autreles>\n")
+        fic.write("<autreles>" + self.eAutreLes.get()+"</autreles>\n")
         fic.write("</ong3>\n")
         fic.write("<ong4>\n")
-        for ligne in Commun.encode(self.stGestes.get(1.0,END)).split("\n"):
+        for ligne in self.stGestes.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write("<geste>" + ligne +"</geste>\n")
             else:
                fic.write("<geste>" + ligne + "</geste>\n")
-        for ligne in Commun.encode(self.stSoins.get(1.0,END)).split("\n"):
+        for ligne in self.stSoins.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write("<soin>" + ligne +"</soin>\n")
             else:
                fic.write("<soin>" + ligne + "</soin>\n")
-        fic.write("<condi>" + Commun.encode(self.cbCondi.get()) + "</condi>\n")
-        fic.write("<evac>" + Commun.encode(self.cbEvac.get()) + "</evac>\n")
-        fic.write("<dest>" + Commun.encode(self.eDest.get())+"</dest>\n")
+        fic.write("<condi>" + self.cbCondi.get() + "</condi>\n")
+        fic.write("<evac>" + self.cbEvac.get() + "</evac>\n")
+        fic.write("<dest>" + self.eDest.get()+"</dest>\n")
         fic.write("</ong4>\n")
         fic.write('</corps>\n')
         fic.write('<bot>\n')
-        fic.write("<gdh>" + Commun.encode(self.efGdhDep.getvalue())+"</gdh>\n")
-        fic.write("<ack>" + Commun.encode(self.rbACK.getvalue())+"</ack>\n")
+        fic.write("<gdh>" + self.efGdhDep.getvalue()+"</gdh>\n")
+        fic.write("<ack>" + self.rbACK.getvalue()+"</ack>\n")
         fic.write('</bot>\n')
             
         fic.write('</msg>\n')

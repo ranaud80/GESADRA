@@ -1,13 +1,13 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
-from ScrolledText import ScrolledText
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
 
 import datetime
 import time
 import os
-import tkMessageBox
-import tkFont
+import tkinter.messagebox as tkMessageBox
+import tkinter.font as tkFont
 import Pmw
 import Commun # Module principal des fonctions annexes
 
@@ -256,26 +256,26 @@ class FormBilAmb:
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Informations transmission
-        fic.write("GDH Emission : " + Commun.encode(self.efGdh.getvalue())+"\n")
-        fic.write("Emis par     : " + Commun.encode(self.cbEmetteur.get())+"\n")
-        fic.write("Recu par     : " + Commun.encode(self.cbDestinataire.get())+"\n")
-        fic.write("Instructions : " + Commun.encode(self.eInstruc.get())+"\n")
+        fic.write("GDH Emission : " + self.efGdh.getvalue()+"\n")
+        fic.write("Emis par     : " + self.cbEmetteur.get()+"\n")
+        fic.write("Recu par     : " + self.cbDestinataire.get()+"\n")
+        fic.write("Instructions : " + self.eInstruc.get()+"\n")
         fic.write('================================================================================\n')
 
         # Entête du message
         fic.write("BILAN D'AMBIANCE".center(80) + "\n")
-        fic.write("Origine      : " + Commun.encode(self.efOrigine.getvalue())+"\n")
-        fic.write("Dest. Action : " + Commun.encode(self.efDestAction.getvalue())+"\n")
-        fic.write("Dest. Info   : " + Commun.encode(self.eDestInfo.get())+"\n")
-        fic.write("Urgence      : " + Commun.encode(self.cbDegUrg.get())+"\n")
+        fic.write("Origine      : " + self.efOrigine.getvalue()+"\n")
+        fic.write("Dest. Action : " + self.efDestAction.getvalue()+"\n")
+        fic.write("Dest. Info   : " + self.eDestInfo.get()+"\n")
+        fic.write("Urgence      : " + self.cbDegUrg.get()+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Corps du message
-        fic.write("Objet        : " + Commun.encode(self.efObjet.getvalue())+"\n")
-        fic.write("Localisation : " + Commun.encode(self.eLoc.get())+"\n")
+        fic.write("Objet        : " + self.efObjet.getvalue()+"\n")
+        fic.write("Localisation : " + self.eLoc.get()+"\n")
         fic.write("Bilan circonstancié : \n\n")
         # découpage des lignes du message
-        for ligne in Commun.encode(self.stBilan.get(1.0,END)).split("\n"):
+        for ligne in self.stBilan.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write(ligne +"\n")
@@ -284,8 +284,8 @@ class FormBilAmb:
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Final du message
-        fic.write("GDH Dépôt    : " + Commun.encode(self.efGdhDep.getvalue())+"\n")
-        fic.write("Demande A.R. : " + Commun.encode(self.rbACK.getvalue())+"\n")
+        fic.write("GDH Dépôt    : " + self.efGdhDep.getvalue()+"\n")
+        fic.write("Demande A.R. : " + self.rbACK.getvalue()+"\n")
         fic.write("FIN DE MESSAGE".center(80) + "\n")
         fic.write('================================================================================\n')
         fic.write('- ' +(self.root.userData['ACTIVATION'] + ' - ')*3+'\n')
@@ -305,22 +305,22 @@ class FormBilAmb:
         fic.write('<vers>' + self.root.userData['VERSION'] + '</vers>\n')
         fic.write('<mode>' + self.root.userData['ACTIVATION'] + '</mode>\n')
         fic.write('<trans>\n')
-        fic.write('<gdh>' + Commun.encode(self.efGdh.getvalue())+'</gdh>\n')
-        fic.write('<emis>' + Commun.encode(self.cbEmetteur.get())+'</emis>\n')
-        fic.write('<recu>' + Commun.encode(self.cbDestinataire.get())+"</recu>\n")
-        fic.write("<instr>" + Commun.encode(self.eInstruc.get())+"</instr>\n")
+        fic.write('<gdh>' + self.efGdh.getvalue()+'</gdh>\n')
+        fic.write('<emis>' + self.cbEmetteur.get()+'</emis>\n')
+        fic.write('<recu>' + self.cbDestinataire.get()+"</recu>\n")
+        fic.write("<instr>" + self.eInstruc.get()+"</instr>\n")
         fic.write('</trans>\n')
         fic.write("<top>\n")
-        fic.write("<from>" + Commun.encode(self.efOrigine.getvalue())+"</from>\n")
-        fic.write("<to>" + Commun.encode(self.efDestAction.getvalue())+"</to>\n")
-        fic.write("<info>" + Commun.encode(self.eDestInfo.get())+"</info>\n")
-        fic.write("<urg>" + Commun.encode(self.cbDegUrg.get())+"</urg>\n")
+        fic.write("<from>" + self.efOrigine.getvalue()+"</from>\n")
+        fic.write("<to>" + self.efDestAction.getvalue()+"</to>\n")
+        fic.write("<info>" + self.eDestInfo.get()+"</info>\n")
+        fic.write("<urg>" + self.cbDegUrg.get()+"</urg>\n")
         fic.write('</top>\n')
         fic.write("<corps>\n")
-        fic.write("<obj>" + Commun.encode(self.efObjet.get())+"</obj>\n")
-        fic.write("<local>" + Commun.encode(self.eLoc.get())+"</local>\n")
+        fic.write("<obj>" + self.efObjet.get()+"</obj>\n")
+        fic.write("<local>" + self.eLoc.get()+"</local>\n")
         # découpage des lignes du message
-        for ligne in Commun.encode(self.stBilan.get(1.0,END)).split("\n"):
+        for ligne in self.stBilan.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write("<txt>" + ligne +"</txt>\n")
@@ -328,8 +328,8 @@ class FormBilAmb:
                fic.write("<txt>" + ligne + "</txt>\n")
         fic.write('</corps>\n')
         fic.write('<bot>\n')
-        fic.write("<gdh>" + Commun.encode(self.efGdhDep.getvalue())+"</gdh>\n")
-        fic.write("<ack>" + Commun.encode(self.rbACK.getvalue())+"</ack>\n")
+        fic.write("<gdh>" + self.efGdhDep.getvalue()+"</gdh>\n")
+        fic.write("<ack>" + self.rbACK.getvalue()+"</ack>\n")
         fic.write('</bot>\n')
             
         fic.write('</msg>\n')

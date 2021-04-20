@@ -1,13 +1,13 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
-from ScrolledText import ScrolledText
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
  
 import datetime
 import time
 import os
-import tkMessageBox
-import tkFont
+import tkinter.messagebox as tkMessageBox
+import tkinter.font as tkFont
 import Pmw
 import Commun # Module principal des fonctions annexes
 
@@ -407,41 +407,41 @@ class FormIARU:
 
         # Informations transmission
         if self.cAction == "R":
-            fic.write("Emis par     : " + Commun.encode(self.cbRcvFrom.get())+"\n")
-            fic.write("Recu par     : " + Commun.encode(self.lQrz.get())+"\n")
-            fic.write("Instructions : " + "Dernier opérateur " + Commun.encode(self.lQrz.get())+"\n")
+            fic.write("Emis par     : " + self.cbRcvFrom.get()+"\n")
+            fic.write("Recu par     : " + self.lQrz.get()+"\n")
+            fic.write("Instructions : " + "Dernier opérateur " + self.lQrz.get()+"\n")
         elif self.cAction == "S":
-            fic.write("Emis par     : " + Commun.encode(self.lQrz.get())+"\n")
-            fic.write("Recu par     : " + Commun.encode(self.cbSenTo.get())+"\n")
-            fic.write("Instructions : " + "Premier opérateur " + Commun.encode(self.lQrz.get())+"\n")
+            fic.write("Emis par     : " + self.lQrz.get()+"\n")
+            fic.write("Recu par     : " + self.cbSenTo.get()+"\n")
+            fic.write("Instructions : " + "Premier opérateur " + self.lQrz.get()+"\n")
         elif self.cAction == "P":
-            fic.write("Emis par     : " + Commun.encode(self.cbRcvFrom.get())+"\n")
-            fic.write("Recu par     : " + Commun.encode(self.cbSenTo.get())+"\n")
-            fic.write("Instructions : " + "Retransmission par " + Commun.encode(self.lQrz.get())+"\n")
+            fic.write("Emis par     : " + self.cbRcvFrom.get()+"\n")
+            fic.write("Recu par     : " + self.cbSenTo.get()+"\n")
+            fic.write("Instructions : " + "Retransmission par " + self.lQrz.get()+"\n")
         fic.write('================================================================================\n')
 
         # Entête du message
         fic.write("MESSAGE IARU".center(80) + "\n")
-        fic.write("Origine      : " + Commun.encode(self.efOrigine.getvalue())+"\n")
-        fic.write("Dest. Action : " + Commun.encode(self.efDestAction.getvalue())+"\n")
-        fic.write("Urgence      : " + Commun.encode(self.cbDegUrg.get())+"\n")
+        fic.write("Origine      : " + self.efOrigine.getvalue()+"\n")
+        fic.write("Dest. Action : " + self.efDestAction.getvalue()+"\n")
+        fic.write("Urgence      : " + self.cbDegUrg.get()+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Corps du message
-        fic.write("Objet        : " + "Message de " + Commun.encode(self.efWord.getvalue()) + " mots" +\
-                                      " du " + Commun.encode(self.efDate.getvalue()) +\
-                                      " à " + Commun.encode(self.efTime.getvalue()) +"\n")
-        fic.write("Référence    : " + Commun.encode(self.efStation.getvalue()) + " - " +\
-                                      Commun.encode(self.efNumber.getvalue())+"\n")
+        fic.write("Objet        : " + "Message de " + self.efWord.getvalue() + " mots" +\
+                                      " du " + self.efDate.getvalue() +\
+                                      " à " + self.efTime.getvalue() +"\n")
+        fic.write("Référence    : " + self.efStation.getvalue() + " - " +\
+                                      self.efNumber.getvalue()+"\n")
         fic.write("Message : \n\n")
-        fic.write(Commun.encode(self.stText.get(1.0,END))+"\n")
+        fic.write(self.stText.get(1.0,END)+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Final du message
-        fic.write("GDH Récept°  : " + Commun.encode(self.efRcvDate.getvalue()) + " " +\
-                                      Commun.encode(self.efRcvTime.getvalue()) +"\n")
-        fic.write("GDH Emission : " + Commun.encode(self.efSenDate.getvalue()) + " " +\
-                                      Commun.encode(self.efSenTime.getvalue()) +"\n")
+        fic.write("GDH Récept°  : " + self.efRcvDate.getvalue() + " " +\
+                                      self.efRcvTime.getvalue() +"\n")
+        fic.write("GDH Emission : " + self.efSenDate.getvalue() + " " +\
+                                      self.efSenTime.getvalue() +"\n")
         fic.write("FIN DE MESSAGE".center(80) + "\n")
         fic.write('================================================================================\n')
         fic.write('- ' +(self.root.userData['ACTIVATION'] + ' - ')*3+'\n')
@@ -462,54 +462,54 @@ class FormIARU:
         fic.write('<version>' + self.root.userData['VERSION'] + '</version>\n')
         fic.write('<exercise>' + self.root.userData['ACTIVATION'] + '</exercise>\n')
         fic.write('<id>' + self.efNumber.getvalue() + '</id>\n')
-        fic.write('<precedance>' + Commun.encode(self.cbDegUrg.get()) + '</precedance>\n')
-        fic.write('<check>'+ Commun.encode(self.efWord.getvalue()) + '</check>\n')
+        fic.write('<precedance>' + self.cbDegUrg.get() + '</precedance>\n')
+        fic.write('<check>'+ self.efWord.getvalue() + '</check>\n')
         fic.write('<filed>')
-        fic.write('<date>' + Commun.encode(self.efDate.getvalue()) + '</date>')
-        fic.write('<time>' + Commun.encode(self.efTime.getvalue()) + '</time>')
+        fic.write('<date>' + self.efDate.getvalue() + '</date>')
+        fic.write('<time>' + self.efTime.getvalue() + '</time>')
         fic.write('</filed>\n')
         fic.write('<origin>')
-        fic.write('<station>' + Commun.encode(self.efStation.getvalue()) + '</station>')
-        fic.write('<place>' + Commun.encode(self.efPlace.getvalue()) + '</place>')
+        fic.write('<station>' + self.efStation.getvalue() + '</station>')
+        fic.write('<place>' + self.efPlace.getvalue() + '</place>')
         fic.write('</origin>\n')
-        fic.write('<from>' + Commun.encode(self.efOrigine.getvalue()) + '</from>\n')
-        fic.write('<to>' + Commun.encode(self.efDestAction.getvalue()) + '</to>\n')
+        fic.write('<from>' + self.efOrigine.getvalue() + '</from>\n')
+        fic.write('<to>' + self.efDestAction.getvalue() + '</to>\n')
         fic.write('<body>')
-        fic.write('<para>' + Commun.encode(self.stText.get(1.0,END)) + '</para>')
+        fic.write('<para>' + self.stText.get(1.0,END) + '</para>')
         fic.write('</body>\n')
         # Informations transmission
         if self.cAction == "R":
             fic.write('<sentto>')
-            fic.write('<name>' + Commun.encode(self.lQrz.get()) + '</name>')
-            fic.write('<date>' + Commun.encode(self.efSenDate.getvalue()) + '</date>')
-            fic.write('<time>' + Commun.encode(self.efSenTime.getvalue()) + '</time>')
+            fic.write('<name>' + self.lQrz.get() + '</name>')
+            fic.write('<date>' + self.efSenDate.getvalue() + '</date>')
+            fic.write('<time>' + self.efSenTime.getvalue() + '</time>')
             fic.write('</sentto>\n')
             fic.write('<receivedfrom>')
-            fic.write('<name>' + Commun.encode(self.cbRcvFrom.get()) + '</name>')
-            fic.write('<date>' + Commun.encode(self.efRcvDate.getvalue()) + '</date>')
-            fic.write('<time>' + Commun.encode(self.efRcvTime.getvalue()) + '</time>')
+            fic.write('<name>' + self.cbRcvFrom.get() + '</name>')
+            fic.write('<date>' + self.efRcvDate.getvalue() + '</date>')
+            fic.write('<time>' + self.efRcvTime.getvalue() + '</time>')
             fic.write('</receivedfrom>\n')
         elif self.cAction == "S":
             fic.write('<sentto>')
-            fic.write('<name>' + Commun.encode(self.cbSenTo.get()) + '</name>')
-            fic.write('<date>' + Commun.encode(self.efSenDate.getvalue()) + '</date>')
-            fic.write('<time>' + Commun.encode(self.efSenTime.getvalue()) + '</time>')
+            fic.write('<name>' + self.cbSenTo.get() + '</name>')
+            fic.write('<date>' + self.efSenDate.getvalue() + '</date>')
+            fic.write('<time>' + self.efSenTime.getvalue() + '</time>')
             fic.write('</sentto>\n')
             fic.write('<receivedfrom>')
-            fic.write('<name>' + Commun.encode(self.lQrz.get()) + '</name>')
-            fic.write('<date>' + Commun.encode(self.efRcvDate.getvalue()) + '</date>')
-            fic.write('<time>' + Commun.encode(self.efRcvTime.getvalue()) + '</time>')
+            fic.write('<name>' + self.lQrz.get() + '</name>')
+            fic.write('<date>' + self.efRcvDate.getvalue() + '</date>')
+            fic.write('<time>' + self.efRcvTime.getvalue() + '</time>')
             fic.write('</receivedfrom>\n')
         elif self.cAction == "P":
             fic.write('<sentto>')
-            fic.write('<name>' + Commun.encode(self.cbSenTo.get()) + '</name>')
-            fic.write('<date>' + Commun.encode(self.efSenDate.getvalue()) + '</date>')
-            fic.write('<time>' + Commun.encode(self.efSenTime.getvalue()) + '</time>')
+            fic.write('<name>' + self.cbSenTo.get() + '</name>')
+            fic.write('<date>' + self.efSenDate.getvalue() + '</date>')
+            fic.write('<time>' + self.efSenTime.getvalue() + '</time>')
             fic.write('</sentto>\n')
             fic.write('<receivedfrom>')
-            fic.write('<name>' + Commun.encode(self.cbRcvFrom.get()) + '</name>')
-            fic.write('<date>' + Commun.encode(self.efRcvDate.getvalue()) + '</date>')
-            fic.write('<time>' + Commun.encode(self.efRcvTime.getvalue()) + '</time>')
+            fic.write('<name>' + self.cbRcvFrom.get() + '</name>')
+            fic.write('<date>' + self.efRcvDate.getvalue() + '</date>')
+            fic.write('<time>' + self.efRcvTime.getvalue() + '</time>')
             fic.write('</receivedfrom>\n')
             
         fic.write('</message>\n')
@@ -523,16 +523,16 @@ class FormIARU:
         fic = open(Commun.getFullPath(self.root, self.vFicIARU+".MSG"),'w')
 
         # Corps du message
-        fic.write(Commun.encode(self.efNumber.get()) + " ")
-        fic.write(Commun.encode(self.cbDegUrg.get()) + " ")
-        fic.write(Commun.encode(self.efStation.getvalue()) + " ")
-        fic.write(Commun.encode(self.efWord.getvalue()) + " ")
-        fic.write(Commun.encode(self.efPlace.getvalue()) + " ")
-        fic.write(Commun.encode(self.efTime.getvalue()) + " ")
-        fic.write(Commun.encode(self.efDate.getvalue()) + "\n")
-        fic.write("To " + Commun.encode(self.efDestAction.getvalue()) + "\n")
-        fic.write(Commun.encode(self.stText.get(1.0,END)))
-        fic.write("From " + Commun.encode(self.efOrigine.getvalue()) + "\n")
+        fic.write(self.efNumber.get() + " ")
+        fic.write(self.cbDegUrg.get() + " ")
+        fic.write(self.efStation.getvalue() + " ")
+        fic.write(self.efWord.getvalue() + " ")
+        fic.write(self.efPlace.getvalue() + " ")
+        fic.write(self.efTime.getvalue() + " ")
+        fic.write(self.efDate.getvalue() + "\n")
+        fic.write("To " + self.efDestAction.getvalue() + "\n")
+        fic.write(self.stText.get(1.0,END))
+        fic.write("From " + self.efOrigine.getvalue() + "\n")
 
         fic.close()
 

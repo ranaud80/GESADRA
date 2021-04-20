@@ -4,21 +4,23 @@
 #   Auteur          :   F4EED - Frédéric BOUCHET  - frederic.bouchet@adrasec42.org                   #
 #                   :   F4DYW - Florentin BARD    - f4dyw@free.fr                                    #
 #   Refonte V6.00   :   F5IXC - Laurent LE MAGUER - f5ixc@yahoo.fr                                   #
+#   Refonte V6.22b  :   F4EIR - Arnaud -                                                             #
 #   Nom             :   GesADRA.pyw                                                                  #
-#   Version         :   V6.21                                                                        #
-#   Date            :   Mai 2011                                                             #
+#   Version         :   V6.22 beta 3                                                                 #
+#   Date            :   Avril 2021                                                                   #
 #   Description     :   Module python de creation de messages ADRASEC au format texte                #
 #                       Le but de ce module est de créer des fichiers en fonction des formulaires    #
 #                       d'aide a la saisie. Puis a l'aide d'un logiciel                              #
 #                       exterieur de les transmettre au destinataire                                 #   
 #   Creation        :   Juin 2007                                                                    #
 #   Refonte         :   Avril/Septembre 2009                                                         #
+#   Refonte V6.22b  :   Passage en pyton 3                                                           #
 #                                                                                                    #
-#   Application fonctionnant correctement sous python 2.6 (et antérieures) et librairie Pmw 1.3.2    #
+#   Application fonctionnant correctement sous python 3.x (et antérieures) et librairie Pmw 2.x      #
 #   Pour les autres versions, les auteurs ne peuvent être tenus responsables des dysfonctionnenments #
 #----------------------------------------------------------------------------------------------------#
 
-from Tkinter import *
+from tkinter import *
 
 # Modules Fonctionnels de GesADRA
 from BilanAmbiance import *    # Bilans d'Ambiance
@@ -40,8 +42,8 @@ from MsgPOI import *           # Messages Point Particulier
 import datetime
 import time
 import os
-import tkMessageBox
-import tkFileDialog
+import tkinter.messagebox as tkMessageBox
+import tkinter.filedialog as tkFileDialog
 import Pmw
 import sys
 
@@ -74,7 +76,7 @@ class MenuAdra(Tk):
         self.root = self
         # Initialisation des dictionnaires
         self.initCfgListe("GesADRA.cfg")   # Dico de listes pour les combo-boxes
-        self.initUserData(open("GesADRA.ini", 'rb'))   # Dico des données utilisateur
+        self.initUserData(open("GesADRA.ini", 'r'))   # Dico des données utilisateur
         self.initNetData("GesADRA.net")    # Dico des données réseau
 
         # Construction de la fenêtre Principale
@@ -83,7 +85,9 @@ class MenuAdra(Tk):
         self.resizable(width=False, height=False)
 
 		# Mise en forme de la fenêtre
-        self.iconbitmap("appli.ico")
+        if ( sys.platform.startswith('win')): 
+            self.iconbitmap("appli.ico")
+                
         self.title (self.userData['LOGICIEL'] + "-" + self.userData['VERSION'])
         self.protocol("WM_DELETE_WINDOW", self.quitterAppli)
 
@@ -170,7 +174,7 @@ class MenuAdra(Tk):
         # Composants de la fenêtre
         texte = "..: Aide à la gestion d'une opération de secours avec réseau d'urgence :.."
         self.tictac = StringVar()
-        Label (self, text=texte, fg="blue", bg="orange", width=170).grid(row=vLigne, column=0, sticky=E+W)
+        Label (self, text=texte, fg="blue", bg="orange").grid(row=vLigne, column=0, sticky=E+W)
         Label (self, textvariable=self.tictac, fg="blue", bg="orange", width=8).grid(row=vLigne, column=0, sticky=E)
         vLigne += 1
 
@@ -398,7 +402,7 @@ class MenuAdra(Tk):
     def initCfgListe(self, ficCfg):
         "Alimente le dictionnaire de configuration avec des listes de valeurs"
         # Ouverture du fichier de configuration en mode lecture
-        fic = open(ficCfg,'rb') 
+        fic = open(ficCfg,'r', encoding='iso-8859-15') 
         lignes = fic.readlines() ## Récupération du contenu du fichier
         fic.close()
         for lig in lignes:
@@ -417,7 +421,7 @@ class MenuAdra(Tk):
         # Nettoyage du dictionnaire
         self.userData.clear()
         # Ouverture du fichier utilisateur en mode lecture
-        # fic = open(ficUser,'rb') 
+        # fic = open(ficUser,'r') 
         lignes = ficUser.readlines() # Récupération du contenu du fichier
         ficUser.close() 
         for lig in lignes:
@@ -436,7 +440,7 @@ class MenuAdra(Tk):
         # Nettoyage du dictionnaire
         self.netData.clear()
         # Ouverture du fichier utilisateur en mode lecture
-        fic = open(ficNet,'rb') 
+        fic = open(ficNet,'r') 
         lignes = fic.readlines() # Récupération du contenu du fichier
         fic.close() 
         for lig in lignes:
@@ -447,7 +451,7 @@ class MenuAdra(Tk):
             if len(sp) == 2:
                 cle    = sp[0].strip()
                 valeur = sp[1].strip()
-                self.netData[cle] = valeur.decode("UTF-8")
+                self.netData[cle] = valeur
 
 
 

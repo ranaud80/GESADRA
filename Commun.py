@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
+from tkinter import *
 
 import datetime
 import time
@@ -230,7 +230,8 @@ def nouvelleFenetre(root, titre):
     # Paramétrage de la fenêtre
     fenetre.resizable(width = False, height = False)
     fenetre.wm_state()
-    fenetre.iconbitmap("appli.ico")
+    if ( sys.platform.startswith('win')): 
+        fenetre.iconbitmap("appli.ico")
     fenetre.title (titre +" - Activation : " + root.userData['ACTIVATION'])
 
     # Instanciation d'une bulle d'aide
@@ -415,7 +416,7 @@ def encode (chaine):
     try:
         return chaine.encode ('iso-8859-15')
     except:
-        print chaine
+        print (chaine)
         return "?"
 #
 def getListeReseau(root):
@@ -471,7 +472,7 @@ class InfosRezo:
                  self._Comment   +"\n"
 
         fic = open (vFic,'a')
-        fic.write(encode(vLigne))
+        fic.write(vLigne)
         fic.close()
         
 		# Mise à jour de la main courante (si ouverte)
@@ -537,7 +538,7 @@ class InfosMCI:
                  self._Texte+"\n"
 
         fic = open (vFic,'a')
-        fic.write(encode(vLigne))
+        fic.write(vLigne)
         fic.close()
         
 		# Mise à jour de la main courante (si ouverte)
@@ -637,7 +638,7 @@ class InfosSATER:
                  self._Comment+"\n"
 
         fic = open (vFic,'a')
-        fic.write(encode(vLigne))
+        fic.write(vLigne)
         fic.close()
 
 
@@ -701,7 +702,7 @@ class InfosPOI:
                  self._Comment+"\n"
 
         fic = open (vFic,'a')
-        fic.write(encode(vLigne))
+        fic.write(vLigne)
         fic.close()
 
 
@@ -762,7 +763,7 @@ class InfosVict:
                  self._Autre+"\n"
 
         fic = open (vFic,'a')
-        fic.write(encode(vLigne))
+        fic.write(vLigne)
         fic.close()
 
     # Rendu pour affichage à l'écran

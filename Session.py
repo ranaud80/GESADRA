@@ -1,13 +1,13 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
-from ScrolledText import ScrolledText
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
  
 import datetime
 import time
 import os
-import tkMessageBox
-import tkFileDialog
+import tkinter.messagebox as tkMessageBox
+import tkinter.filedialog as tkFileDialog
 import Pmw
 import sys
 
@@ -26,7 +26,8 @@ class FormNewSess(Toplevel):
         Toplevel.__init__(self)
         Pmw.initialise()
         # Paramétrage de la fenêtre
-        self.iconbitmap("appli.ico")
+        if ( sys.platform.startswith('win')): 
+            self.iconbitmap("appli.ico")
         self.resizable(width = False, height = False)
         self.wm_state()
         self.title ("Nouvelle Session")
@@ -88,7 +89,7 @@ class FormNewSess(Toplevel):
         if os.path.isdir(vRepSession) == False:
             os.mkdir(vRepSession)
             # Création du fichier de session 
-            self.root.initUserData(open("GesADRA.ini", 'rb'))   # Dico des données utilisateur
+            self.root.initUserData(open("GesADRA.ini", 'r'))   # Dico des données utilisateur
             self.root.userData['REPTRAVAIL'] = vRepSession
             self.root.userData['SESSION'] = vSession
             self.root.userData['INTITULE'] += datetime.datetime.now().strftime(" %d/%m/%Y")
@@ -151,7 +152,8 @@ class FormSession(Toplevel):
         Toplevel.__init__(self)
         Pmw.initialise()
         # Paramétrage de la fenêtre
-        self.iconbitmap("appli.ico")
+        if ( sys.platform.startswith('win')): 
+            self.iconbitmap("appli.ico")
         self.resizable(width = False, height = False)
         self.wm_state()
         self.title ("Paramètres de Session")

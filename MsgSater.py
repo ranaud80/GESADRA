@@ -1,12 +1,12 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
-from ScrolledText import ScrolledText
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
 
 import datetime
 import time
 import os
-import tkMessageBox
+import tkinter.messagebox as tkMessageBox
 import Pmw
 import Commun # Module principal des fonctions annexes
 
@@ -226,24 +226,24 @@ class FormSATER:
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Informations transmission
-        fic.write("GDH Emission : " + Commun.encode (self.efGdh.getvalue())+"\n")
-        fic.write("Emis par     : " + Commun.encode (self.cbEmetteur.get())+"\n")
-        fic.write("Recu par     : " + Commun.encode (self.cbDestinataire.get())+"\n")
-        fic.write("Urgence      : " + Commun.encode (self.cbDegUrg.get())+"\n")
-        fic.write("Instructions : " + Commun.encode (self.eInstruc.get())+"\n")
+        fic.write("GDH Emission : " + self.efGdh.getvalue()+"\n")
+        fic.write("Emis par     : " + self.cbEmetteur.get()+"\n")
+        fic.write("Recu par     : " + self.cbDestinataire.get()+"\n")
+        fic.write("Urgence      : " + self.cbDegUrg.get()+"\n")
+        fic.write("Instructions : " + self.eInstruc.get()+"\n")
         fic.write('================================================================================\n')
 
         # Corps du message
         fic.write("MESSAGE RELEVE SATER".center(80) + "\n")
-        fic.write("Système      : " + Commun.encode (self.cbSysteme.get())+"\n")
-        fic.write("Datum        : " + Commun.encode (self.cbDatum.get())+"\n")
-        fic.write("Coordonnée X : " + Commun.encode (self.efCoordX.getvalue())+"\n")
-        fic.write("Coordonnée Y : " + Commun.encode (self.efCoordY.getvalue())+"\n")
-        fic.write("Direction    : " + Commun.encode (self.efDir.getvalue())+"\n")
-        fic.write("Force signal : " + Commun.encode (self.eForce.get())+"\n")
+        fic.write("Système      : " + self.cbSysteme.get()+"\n")
+        fic.write("Datum        : " + self.cbDatum.get()+"\n")
+        fic.write("Coordonnée X : " + self.efCoordX.getvalue()+"\n")
+        fic.write("Coordonnée Y : " + self.efCoordY.getvalue()+"\n")
+        fic.write("Direction    : " + self.efDir.getvalue()+"\n")
+        fic.write("Force signal : " + self.eForce.get()+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
         fic.write("Commentaire  : \n")
-        fic.write(Commun.encode (self.eTexte.get())+"\n")
+        fic.write(self.eTexte.get()+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Final du message
@@ -266,19 +266,19 @@ class FormSATER:
         fic.write('<vers>' + self.root.userData['VERSION'] + '</vers>\n')
         fic.write('<mode>' + self.root.userData['ACTIVATION'] + '</mode>\n')
         fic.write('<trans>\n')
-        fic.write('<gdh>' + Commun.encode(self.efGdh.getvalue())+'</gdh>\n')
-        fic.write('<emis>' + Commun.encode(self.cbEmetteur.get())+'</emis>\n')
-        fic.write('<recu>' + Commun.encode(self.cbDestinataire.get())+"</recu>\n")
-        fic.write("<instr>" + Commun.encode(self.eInstruc.get())+"</instr>\n")
+        fic.write('<gdh>' + self.efGdh.getvalue()+'</gdh>\n')
+        fic.write('<emis>' + self.cbEmetteur.get()+'</emis>\n')
+        fic.write('<recu>' + self.cbDestinataire.get()+"</recu>\n")
+        fic.write("<instr>" + self.eInstruc.get()+"</instr>\n")
         fic.write('</trans>\n')
         fic.write("<corps>\n")
-        fic.write("<sys>" + Commun.encode (self.cbSysteme.get())+"</sys>\n")
-        fic.write("<datum>" + Commun.encode (self.cbDatum.get())+"</datum>\n")
-        fic.write("<coordx>" + Commun.encode (self.efCoordX.getvalue())+"</coordx>\n")
-        fic.write("<coordy>" + Commun.encode (self.efCoordY.getvalue())+"</coordy>\n")
-        fic.write("<dir>" + Commun.encode (self.efDir.getvalue())+"</dir>\n")
-        fic.write("<force>" + Commun.encode (self.eForce.get())+"</force>\n")
-        fic.write("<txt>" + Commun.encode(self.eTexte.get())+"</txt>\n")
+        fic.write("<sys>" + self.cbSysteme.get()+"</sys>\n")
+        fic.write("<datum>" + self.cbDatum.get()+"</datum>\n")
+        fic.write("<coordx>" + self.efCoordX.getvalue()+"</coordx>\n")
+        fic.write("<coordy>" + self.efCoordY.getvalue()+"</coordy>\n")
+        fic.write("<dir>" + self.efDir.getvalue()+"</dir>\n")
+        fic.write("<force>" + self.eForce.get()+"</force>\n")
+        fic.write("<txt>" + self.eTexte.get()+"</txt>\n")
         fic.write('</corps>\n')
             
         fic.write('</msg>\n')

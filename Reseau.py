@@ -1,12 +1,12 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
-from ScrolledText import ScrolledText
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
  
 import datetime
 import time
 import os
-import tkMessageBox
+import tkinter.messagebox as tkMessageBox
 import Pmw
 
 # Modules Techniques de GesADRA
@@ -388,7 +388,7 @@ def writeReseau(self):
     """Sauvegarde des paramètres de session""" 
     vData = []
     for cle, valeur in self.root.netData.items():
-        vData.append(cle + " = " + str(valeur.encode("UTF-8"))+"\n")
+        vData.append(cle + " = " + valeur +"\n")
     fic = open(Commun.getFullPath(self.root,Commun.getFicReseau(self.root)), 'w')
     fic.writelines(vData)
     fic.close()

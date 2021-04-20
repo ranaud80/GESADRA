@@ -1,13 +1,13 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
-from ScrolledText import ScrolledText
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
  
 import datetime
 import time
 import os
-import tkMessageBox
-import tkFont
+import tkinter.messagebox as tkMessageBox
+import tkinter.font as tkFont
 import Pmw
 import Commun # Module principal des fonctions annexes
 
@@ -191,7 +191,7 @@ class FormRMD:
         else :
             tkMessageBox.showinfo('Message RMD', 'Message créé : ' + self.vFicRMD)
         
-	self.fenetre.destroy()
+	# self.fenetre.destroy
 
 
     def annulerMD(self, evt = None):
@@ -276,34 +276,34 @@ class FormRMD:
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Informations transmission
-        fic.write("GDH Emission : " + Commun.encode (self.efGdh.getvalue())+ "\n")
-        fic.write("Emis par     : " + Commun.encode (self.cbEmetteur.get())+ "\n")
-        fic.write("Reçu par     : " + Commun.encode (self.cbDestinataire.get())+ "\n")
-        fic.write("Instructions : " + Commun.encode (self.eInstruc.get())+ "\n")
+        fic.write("GDH Emission : " + self.efGdh.getvalue()+ "\n")
+        fic.write("Emis par     : " + self.cbEmetteur.get()+ "\n")
+        fic.write("Reçu par     : " + self.cbDestinataire.get()+ "\n")
+        fic.write("Instructions : " + self.eInstruc.get()+ "\n")
         fic.write('================================================================================\n')
 
         # Entête du message
         fic.write("MESSAGE RENSEIGNEMENT MATIERE DANGEUREUSE".center(80) + "\n")
-        fic.write("Origine      : " + Commun.encode (self.efOrigine.getvalue())+"\n")
-        fic.write("Dest. Action : " + Commun.encode (self.efDestAction.getvalue())+"\n")
-        fic.write("Dest. Info   : " + Commun.encode (self.eDestInfo.get())+"\n")
-        fic.write("Urgence      : " + Commun.encode (self.cbDegUrg.get())+"\n")
+        fic.write("Origine      : " + self.efOrigine.getvalue()+"\n")
+        fic.write("Dest. Action : " + self.efDestAction.getvalue()+"\n")
+        fic.write("Dest. Info   : " + self.eDestInfo.get()+"\n")
+        fic.write("Urgence      : " + self.cbDegUrg.get()+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Corps du message
         fic.write("Plaque DANGER \n")
-        fic.write("Code Danger  : " + Commun.encode (self.efDanger.getvalue())+"\n")
-        fic.write("Numero ONU   : " + Commun.encode (self.efNumOnu.getvalue())+"\n")
+        fic.write("Code Danger  : " + self.efDanger.getvalue()+"\n")
+        fic.write("Numero ONU   : " + self.efNumOnu.getvalue()+"\n")
         fic.write("Picto. LOSANGE \n")
-        fic.write("Code Panneau : " + Commun.encode (self.cbPanneau.get())+"\n")
+        fic.write("Code Panneau : " + self.cbPanneau.get()+"\n")
         fic.write("\n")
-        fic.write("Etat matière : " + Commun.encode (self.cbEtatMatiere.get())+"\n")
-        fic.write("Si 'AUTRE'   : " + Commun.encode (self.eAutre.get())+"\n")
-        fic.write("Couleur      : " + Commun.encode (self.eCouleur.get())+"\n")
-        fic.write("Odeur        : " + Commun.encode (self.eOdeur.get())+"\n")
+        fic.write("Etat matière : " + self.cbEtatMatiere.get()+"\n")
+        fic.write("Si 'AUTRE'   : " + self.eAutre.get()+"\n")
+        fic.write("Couleur      : " + self.eCouleur.get()+"\n")
+        fic.write("Odeur        : " + self.eOdeur.get()+"\n")
         fic.write("Commentaire  : \n\n")
         # découpage des lignes du commentaire
-        for ligne in Commun.encode(self.stComment.get(1.0,END)).split("\n"):
+        for ligne in self.stComment.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write(ligne +"\n")
@@ -312,8 +312,8 @@ class FormRMD:
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Final du message
-        fic.write("GDH Dépôt    : " + Commun.encode (self.efGdhDep.getvalue())+"\n")
-        fic.write("Demande A.R. : " + Commun.encode (self.rbACK.getvalue())+"\n")
+        fic.write("GDH Dépôt    : " + self.efGdhDep.getvalue()+"\n")
+        fic.write("Demande A.R. : " + self.rbACK.getvalue()+"\n")
         fic.write("FIN DE MESSAGE".center(80) + "\n")
         fic.write('================================================================================\n')
         fic.write('- ' +(self.root.userData['ACTIVATION'] + ' - ')*3+'\n')
@@ -333,27 +333,27 @@ class FormRMD:
         fic.write('<vers>' + self.root.userData['VERSION'] + '</vers>\n')
         fic.write('<mode>' + self.root.userData['ACTIVATION'] + '</mode>\n')
         fic.write('<trans>\n')
-        fic.write('<gdh>' + Commun.encode(self.efGdh.getvalue())+'</gdh>\n')
-        fic.write('<emis>' + Commun.encode(self.cbEmetteur.get())+'</emis>\n')
-        fic.write('<recu>' + Commun.encode(self.cbDestinataire.get())+"</recu>\n")
-        fic.write("<instr>" + Commun.encode(self.eInstruc.get())+"</instr>\n")
+        fic.write('<gdh>' + self.efGdh.getvalue()+'</gdh>\n')
+        fic.write('<emis>' + self.cbEmetteur.get()+'</emis>\n')
+        fic.write('<recu>' + self.cbDestinataire.get()+"</recu>\n")
+        fic.write("<instr>" + self.eInstruc.get()+"</instr>\n")
         fic.write('</trans>\n')
         fic.write("<top>\n")
-        fic.write("<from>" + Commun.encode(self.efOrigine.getvalue())+"</from>\n")
-        fic.write("<to>" + Commun.encode(self.efDestAction.getvalue())+"</to>\n")
-        fic.write("<info>" + Commun.encode(self.eDestInfo.get())+"</info>\n")
-        fic.write("<urg>" + Commun.encode(self.cbDegUrg.get())+"</urg>\n")
+        fic.write("<from>" + self.efOrigine.getvalue()+"</from>\n")
+        fic.write("<to>" + self.efDestAction.getvalue()+"</to>\n")
+        fic.write("<info>" + self.eDestInfo.get()+"</info>\n")
+        fic.write("<urg>" + self.cbDegUrg.get()+"</urg>\n")
         fic.write('</top>\n')
         fic.write("<corps>\n")
-        fic.write("<danger>" + Commun.encode (self.efDanger.getvalue())+"</danger>\n")
-        fic.write("<numonu>" + Commun.encode (self.efNumOnu.getvalue())+"</numonu>\n")
-        fic.write("<panno>" + Commun.encode (self.cbPanneau.get())+"</panno>\n")
-        fic.write("<matiere>" + Commun.encode (self.cbEtatMatiere.get())+"</matiere>\n")
-        fic.write("<autre>" + Commun.encode (self.eAutre.get())+"</autre>\n")
-        fic.write("<couleur>" + Commun.encode (self.eCouleur.get())+"</couleur>\n")
-        fic.write("<odeur>" + Commun.encode (self.eOdeur.get())+"</odeur>\n")
+        fic.write("<danger>" + self.efDanger.getvalue()+"</danger>\n")
+        fic.write("<numonu>" + self.efNumOnu.getvalue()+"</numonu>\n")
+        fic.write("<panno>" + self.cbPanneau.get()+"</panno>\n")
+        fic.write("<matiere>" + self.cbEtatMatiere.get()+"</matiere>\n")
+        fic.write("<autre>" + self.eAutre.get()+"</autre>\n")
+        fic.write("<couleur>" + self.eCouleur.get()+"</couleur>\n")
+        fic.write("<odeur>" + self.eOdeur.get()+"</odeur>\n")
         # découpage des lignes du commentaire
-        for ligne in Commun.encode(self.stComment.get(1.0,END)).split("\n"):
+        for ligne in self.stComment.get(1.0,END).split("\n"):
             if len(ligne) > 79:
                 for ligne in textwrap.wrap(ligne,79):
                     fic.write("<txt>" + ligne +"</txt>\n")
@@ -361,8 +361,8 @@ class FormRMD:
                fic.write("<txt>" + ligne + "</txt>\n")
         fic.write('</corps>\n')
         fic.write('<bot>\n')
-        fic.write("<gdh>" + Commun.encode(self.efGdhDep.getvalue())+"</gdh>\n")
-        fic.write("<ack>" + Commun.encode(self.rbACK.getvalue())+"</ack>\n")
+        fic.write("<gdh>" + self.efGdhDep.getvalue()+"</gdh>\n")
+        fic.write("<ack>" + self.rbACK.getvalue()+"</ack>\n")
         fic.write('</bot>\n')
             
         fic.write('</msg>\n')

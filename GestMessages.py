@@ -1,13 +1,13 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
-from ScrolledText import ScrolledText
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
  
 import datetime
 import time
 import os
-import tkMessageBox
-import tkFont
+import tkinter.messagebox as tkMessageBox
+import tkinter.font as tkFont
 import Pmw
 import Commun # Module principal des fonctions annexes
 

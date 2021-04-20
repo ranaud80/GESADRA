@@ -1,12 +1,12 @@
 # -*- coding: iso-8859-15 -*-
 
-from Tkinter import *
-from ScrolledText import ScrolledText
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
 
 import datetime
 import time
 import os
-import tkMessageBox
+import tkinter.messagebox as tkMessageBox
 import Pmw
 import Commun # Module principal des fonctions annexes
 
@@ -261,7 +261,7 @@ class FormTMD:
         else :
             tkMessageBox.showinfo('Message TMD', 'Message créé : ' + self.vFicTMD)
         
-	self.fenetre.destroy()
+	# self.fenetre.destroy
 
 
     # Action sur un bouton "Annuler"
@@ -359,36 +359,36 @@ class FormTMD:
         fic.write('--------------------------------------------------------------------------------\n')
     
         # Informations transmission
-        fic.write("GDH Emission : " + Commun.encode(self.efGdh.getvalue())+ "\n")
-        fic.write("Emis par     : " + Commun.encode(self.cbEmetteur.get())+ "\n")
-        fic.write("Reçu par     : " + Commun.encode(self.cbDestinataire.get())+ "\n")
-        fic.write("Instructions : " + Commun.encode(self.eInstruc.get())+ "\n")
+        fic.write("GDH Emission : " + self.efGdh.getvalue()+ "\n")
+        fic.write("Emis par     : " + self.cbEmetteur.get()+ "\n")
+        fic.write("Reçu par     : " + self.cbDestinataire.get()+ "\n")
+        fic.write("Instructions : " + self.eInstruc.get()+ "\n")
         fic.write('================================================================================\n')
 
         # Entête du message
         fic.write("MESSAGE TRANSPORT MATIERES DANGEUREUSES".center(80) + "\n")
-        fic.write("Origine      : " + Commun.encode(self.efOrigine.getvalue())+"\n")
-        fic.write("Dest. Action : " + Commun.encode(self.efDestAction.getvalue())+"\n")
-        fic.write("Dest. Info   : " + Commun.encode(self.eDestInfo.get())+"\n")
-        fic.write("Urgence      : " + Commun.encode(self.cbDegUrg.get())+"\n")
+        fic.write("Origine      : " + self.efOrigine.getvalue()+"\n")
+        fic.write("Dest. Action : " + self.efDestAction.getvalue()+"\n")
+        fic.write("Dest. Info   : " + self.eDestInfo.get()+"\n")
+        fic.write("Urgence      : " + self.cbDegUrg.get()+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Description véhicule
-        fic.write("Véhicule            : " + Commun.encode (self.cbVehicule.get())+"\n")
-        fic.write("Type                : " + Commun.encode (self.cbTypVeh.get())+"\n")
-        fic.write("Poids (T)           : " + Commun.encode (self.ePoidsVeh.get())+"\n")
-        fic.write("Capacité (m3)       : " + Commun.encode (self.eCapCit.get())+"\n")
-        fic.write("Volume du Fret (m3) : " + Commun.encode (self.eVolMat.get())+"\n")
-        fic.write("Poids du Fret (T)   : " + Commun.encode (self.ePoidsFret.get())+"\n")
-        fic.write("Nb compartiments calorifugés : "  + Commun.encode (self.eCompart.get())+"\n")
-        fic.write("Syst. réchauffage   : " + Commun.encode (self.eRechauf.get())+"\n")
-        fic.write("Syst. refrigérant   : " + Commun.encode (self.eRefrig.get())+"\n")
+        fic.write("Véhicule            : " + self.cbVehicule.get()+"\n")
+        fic.write("Type                : " + self.cbTypVeh.get()+"\n")
+        fic.write("Poids (T)           : " + self.ePoidsVeh.get()+"\n")
+        fic.write("Capacité (m3)       : " + self.eCapCit.get()+"\n")
+        fic.write("Volume du Fret (m3) : " + self.eVolMat.get()+"\n")
+        fic.write("Poids du Fret (T)   : " + self.ePoidsFret.get()+"\n")
+        fic.write("Nb compartiments calorifugés : "  + self.eCompart.get()+"\n")
+        fic.write("Syst. réchauffage   : " + self.eRechauf.get()+"\n")
+        fic.write("Syst. refrigérant   : " + self.eRefrig.get()+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
 
         #   
-        fic.write("Conditionnement : " + Commun.encode (self.cbCond.get())+"\n")
-        fic.write("Nombre          : " + Commun.encode (self.eNbCond.get())+"\n")
-        fic.write("Poids ou Volume : " + Commun.encode (self.ePoidsCond.get())+"\n")
+        fic.write("Conditionnement : " + self.cbCond.get()+"\n")
+        fic.write("Nombre          : " + self.eNbCond.get()+"\n")
+        fic.write("Poids ou Volume : " + self.ePoidsCond.get()+"\n")
         fic.write("\n")
         fic.write (" Sous-emballage    Matiere       Quantite    Poids ou Volume\n")
         for ligne in self.emballage : 
@@ -402,18 +402,18 @@ class FormTMD:
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Identité du Transporteur et du Véhicule
-        fic.write("Nom          : " + Commun.encode (self.eNom.get())+"\n")
-        fic.write("Tel/Fax      : " + Commun.encode (self.eTel.get())+"\n")
-        fic.write("Adresse      : " + Commun.encode (self.eAdr.get())+"\n")
-        fic.write("Immat. véh.  : " + Commun.encode (self.eImmat.get())+"\n")
-        fic.write("Nationalité  : " + Commun.encode (self.eNation.get())+"\n")
-        fic.write("Expéd. Fret  : " + Commun.encode (self.eExped.get())+"\n")
-        fic.write("Destin. Fret : " + Commun.encode (self.eClient.get())+"\n")
+        fic.write("Nom          : " + self.eNom.get()+"\n")
+        fic.write("Tel/Fax      : " + self.eTel.get()+"\n")
+        fic.write("Adresse      : " + self.eAdr.get()+"\n")
+        fic.write("Immat. véh.  : " + self.eImmat.get()+"\n")
+        fic.write("Nationalité  : " + self.eNation.get()+"\n")
+        fic.write("Expéd. Fret  : " + self.eExped.get()+"\n")
+        fic.write("Destin. Fret : " + self.eClient.get()+"\n")
         fic.write('--------------------------------------------------------------------------------\n')
 
         # Final du message
-        fic.write("GDH Dépôt    : " + Commun.encode (self.efGdhDep.getvalue())+"\n")
-        fic.write("Demande A.R. : " + Commun.encode (self.rbACK.getvalue())+"\n")
+        fic.write("GDH Dépôt    : " + self.efGdhDep.getvalue()+"\n")
+        fic.write("Demande A.R. : " + self.rbACK.getvalue()+"\n")
         fic.write("FIN DE MESSAGE".center(80) + "\n")
         fic.write('================================================================================\n')
         fic.write('- ' +(self.root.userData['ACTIVATION'] + ' - ')*3+'\n')
@@ -433,37 +433,37 @@ class FormTMD:
         fic.write('<vers>' + self.root.userData['VERSION'] + '</vers>\n')
         fic.write('<mode>' + self.root.userData['ACTIVATION'] + '</mode>\n')
         fic.write('<trans>\n')
-        fic.write('<gdh>' + Commun.encode(self.efGdh.getvalue())+'</gdh>\n')
-        fic.write('<emis>' + Commun.encode(self.cbEmetteur.get())+'</emis>\n')
-        fic.write('<recu>' + Commun.encode(self.cbDestinataire.get())+"</recu>\n")
-        fic.write("<instr>" + Commun.encode(self.eInstruc.get())+"</instr>\n")
+        fic.write('<gdh>' + self.efGdh.getvalue()+'</gdh>\n')
+        fic.write('<emis>' + self.cbEmetteur.get()+'</emis>\n')
+        fic.write('<recu>' + self.cbDestinataire.get()+"</recu>\n")
+        fic.write("<instr>" + self.eInstruc.get()+"</instr>\n")
         fic.write('</trans>\n')
         fic.write("<top>\n")
-        fic.write("<from>" + Commun.encode(self.efOrigine.getvalue())+"</from>\n")
-        fic.write("<to>" + Commun.encode(self.efDestAction.getvalue())+"</to>\n")
-        fic.write("<info>" + Commun.encode(self.eDestInfo.get())+"</info>\n")
-        fic.write("<urg>" + Commun.encode(self.cbDegUrg.get())+"</urg>\n")
+        fic.write("<from>" + self.efOrigine.getvalue()+"</from>\n")
+        fic.write("<to>" + self.efDestAction.getvalue()+"</to>\n")
+        fic.write("<info>" + self.eDestInfo.get()+"</info>\n")
+        fic.write("<urg>" + self.cbDegUrg.get()+"</urg>\n")
         fic.write('</top>\n')
         fic.write("<corps>\n")
           
         # Description véhicule
         fic.write("<ong1>\n")
-        fic.write("<veh>" + Commun.encode (self.cbVehicule.get())+"</veh>\n")
-        fic.write("<type>" + Commun.encode (self.cbTypVeh.get())+"</type>\n")
-        fic.write("<pveh>" + Commun.encode (self.ePoidsVeh.get())+"</pveh>\n")
-        fic.write("<capa>" + Commun.encode (self.eCapCit.get())+"</capa>\n")
-        fic.write("<vfret>" + Commun.encode (self.eVolMat.get())+"</vfret>\n")
-        fic.write("<pfret>" + Commun.encode (self.ePoidsFret.get())+"</pfret>\n")
-        fic.write("<compart>"  + Commun.encode (self.eCompart.get())+"</compart>\n")
-        fic.write("<rechauf>" + Commun.encode (self.eRechauf.get())+"</rechauf>\n")
-        fic.write("<refrig>" + Commun.encode (self.eRefrig.get())+"</refrig>\n")
+        fic.write("<veh>" + self.cbVehicule.get()+"</veh>\n")
+        fic.write("<type>" + self.cbTypVeh.get()+"</type>\n")
+        fic.write("<pveh>" + self.ePoidsVeh.get()+"</pveh>\n")
+        fic.write("<capa>" + self.eCapCit.get()+"</capa>\n")
+        fic.write("<vfret>" + self.eVolMat.get()+"</vfret>\n")
+        fic.write("<pfret>" + self.ePoidsFret.get()+"</pfret>\n")
+        fic.write("<compart>"  + self.eCompart.get()+"</compart>\n")
+        fic.write("<rechauf>" + self.eRechauf.get()+"</rechauf>\n")
+        fic.write("<refrig>" + self.eRefrig.get()+"</refrig>\n")
         fic.write("</ong1>\n")
         fic.write("<ong2>\n")
-        fic.write("<cond>" + Commun.encode (self.cbCond.get())+"</cond>\n")
-        fic.write("<nbcond>" + Commun.encode (self.eNbCond.get())+"</nbcond>\n")
-        fic.write("<poids>" + Commun.encode (self.ePoidsCond.get())+"</poids>\n")
+        fic.write("<cond>" + self.cbCond.get()+"</cond>\n")
+        fic.write("<nbcond>" + self.eNbCond.get()+"</nbcond>\n")
+        fic.write("<poids>" + self.ePoidsCond.get()+"</poids>\n")
         for ligne in self.emballage : 
-            if ligne[0].get().strip() <> "":
+            if ligne[0].get().strip() != "":
                 fic.write ("<emb>")
                 fic.write ("<ssemb>" + ligne[0].get().center(15) +"</ssemb>\n")
                 fic.write ("<mat>"   + ligne[1].get().center(15) + "</mat>\n") 
@@ -472,18 +472,18 @@ class FormTMD:
                 fic.write ("</emb>")
         fic.write("</ong2>\n")
         fic.write("<ong3>\n")
-        fic.write("<nom>" + Commun.encode (self.eNom.get())+"</nom>\n")
-        fic.write("<tel>" + Commun.encode (self.eTel.get())+"</tel>\n")
-        fic.write("<adr>" + Commun.encode (self.eAdr.get())+"</adr>\n")
-        fic.write("<immat>" + Commun.encode (self.eImmat.get())+"</immat>\n")
-        fic.write("<nation>" + Commun.encode (self.eNation.get())+"</nation>\n")
-        fic.write("<exped>" + Commun.encode (self.eExped.get())+"</exped>\n")
-        fic.write("<client>" + Commun.encode (self.eClient.get())+"</client>\n")
+        fic.write("<nom>" + self.eNom.get()+"</nom>\n")
+        fic.write("<tel>" + self.eTel.get()+"</tel>\n")
+        fic.write("<adr>" + self.eAdr.get()+"</adr>\n")
+        fic.write("<immat>" + self.eImmat.get()+"</immat>\n")
+        fic.write("<nation>" + self.eNation.get()+"</nation>\n")
+        fic.write("<exped>" + self.eExped.get()+"</exped>\n")
+        fic.write("<client>" + self.eClient.get()+"</client>\n")
         fic.write("</ong3>\n")
         fic.write('</corps>\n')
         fic.write('<bot>\n')
-        fic.write("<gdh>" + Commun.encode(self.efGdhDep.getvalue())+"</gdh>\n")
-        fic.write("<ack>" + Commun.encode(self.rbACK.getvalue())+"</ack>\n")
+        fic.write("<gdh>" + self.efGdhDep.getvalue()+"</gdh>\n")
+        fic.write("<ack>" + self.rbACK.getvalue()+"</ack>\n")
         fic.write('</bot>\n')
             
         fic.write('</msg>\n')
