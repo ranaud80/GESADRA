@@ -12,20 +12,44 @@ Après une présentation officiel lors de la réunion de zone SUD-EST (Associati
 Nous vous proposons de tester GesADRA, et de découvrir le site Internet qui lui est dédié http://gesadra.free.fr/
 
 == Installation ==
-Pour le faire fonctionner, vous téléchargerez puis installerez :
 
-* le logiciel Python (langage et moteur d'exécution - version 2.6(disponible dans l'espace téléchargement) ou 2.7 recommandée) https://www.python.org/downloads/release/python-269/
+Vous devez posséder une version 3 de python ou installer en fonction de votre windows https://www.python.org/
 
-* la bibliothèque graphique Pmw (un fichier d'installation est disponible dans l'espace téléchargement) https://pypi.org/project/Pmw/
+Une fois ceci fait vous devez installer PMW 2.0.1 patched
+La librairie officiel PMW installée avec pip n'est pas mise à jour depuis des années et provoque des bug.
 
-* l'application GesADRA V6.21 (un fichier d'installation est disponible dans l'espace téléchargement)
+Il faut la patcher avec https://github.com/schrodinger/pmw-patched comme suit dessous :
+
+Télécharger la librairie https://sourceforge.net/projects/pmw/ 
+
+La  décompresser dans un répertoire utilisateur
+
+Ouvrez une invite de commande et rendez vous dans le répertoire Pmw-2.1
+
+installer avec la commande à excecuter dans le répertoire
+
+=== Windows ===
+
+python setup.py install
+
+=== Linux ===
+
+python3 setup.py install
+
+Vous pouvez télécharger l'archive du github et la décompresser dans un répertoire utilisateur.
+
+démarez le programme avec
+python GesADRA.pyw                sous Win
+
+python3 GesADRA.pyw               sous Linux
+
+Le logiciel souffre de problèmes cosmétique mais cette bêta à été réalisée dnas le but de 
+refaire fonctionner l'application en attendant une autre ou une version web.
 
 Vous trouverez une documentation dans le répertoire après l'installation.
 
 
 Cordiales 73'
-Pour le groupe GesADRA,
-Laurent - F5IXC
 
 N.B. : GesADRA est un outil et n'impose aucune méthodologie ou procédure.
 
